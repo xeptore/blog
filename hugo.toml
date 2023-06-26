@@ -1,0 +1,3 @@
+baseURL = 'https://xeptore.blog/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
