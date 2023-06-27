@@ -1,10 +1,10 @@
-+++
-title = "Contact"
-date = 2015-04-03T02:13:50Z
-author = "My Name"
-slug = "contact"
-description = "How to contact me."
-+++
+---
+author: My Name
+date: "2015-04-03T02:13:50Z"
+description: How to contact me.
+slug: contact
+title: Contact
+---
 
 ## Contact
 
