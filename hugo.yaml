@@ -1,0 +1,15 @@
+baseURL: https://xeptore.blog/
+languageCode: en-us
+title: xeptore.blog
+cleanDestinationDir: true
+enableEmoji: true
+enableInlineShortcodes: true
+enableMissingTranslationPlaceholders: true
+enableRobotsTXT: true
+paginate: 20
+paginatePath: pages
+minify:
+  minifyOutput: true
+permalinks:
+  posts: /:slug
+  pages: /:slug
