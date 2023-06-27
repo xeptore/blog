@@ -13,3 +13,5 @@ minify:
 permalinks:
   posts: /:slug
   pages: /:slug
+params:
+  description: Here I write...
