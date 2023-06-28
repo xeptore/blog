@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.read {
+    @apply text-xl bg-slate-500;
+}

@@ -4,20 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="xeptore" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}</title>
-    <link rel="canonical" href="{{ .Permalink }}">
-
-    {{ if .Description }}
-    <meta name="description" content="{{ .Description }}" />
-    {{ else if and .IsPage .Summary }}
-    <meta name="description" content="{{ .Summary }}" />
-    {{ else }}
-    <meta name="description" content="{{ .Site.Params.description }}" />
-    {{ end }}
-
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -31,10 +18,20 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    {{ if .Description }}
+    <meta name="description" content="{{ .Description }}" />
+    {{ else if and .IsPage .Summary }}
+    <meta name="description" content="{{ .Summary }}" />
+    {{ else }}
+    <meta name="description" content="{{ .Site.Params.description }}" />
+    {{ end }}
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
     <meta name="robots" content="index,follow">
 
     {{ if .Keywords }}
@@ -46,16 +43,8 @@
     {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/schema.html" . }}
 
-    <link
-      media="screen"
-      rel="stylesheet"
-      href='{{ "css/common.css" | absURL }}'
-    />
-    <link
-      media="screen"
-      rel="stylesheet"
-      href='{{ "css/content.css" | absURL }}'
-    />
+    {{ $styles := resources.Get "css/global.css" | postCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"/>
 
     {{ block "head" . }}{{ end }}
   </head>
