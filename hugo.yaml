@@ -15,3 +15,8 @@ permalinks:
   pages: /:slug
 params:
   description: Here I write...
+  keywords:
+    - dev
+    - development
+    - tech
+    - tech-writeup
