@@ -1,0 +1,14 @@
+{{ define "head" }}
+<link rel="stylesheet" href='{{ "css/list.css" | absURL }}'>
+{{ end }}
+
+{{ define "main" }}
+<main id="main" class="archive">
+  {{ range .Paginator.Pages }}
+  <div class="post-group">
+    <a class="link" href="{{ .Permalink }}">{{ .Title }}</a>
+    <time>{{ .PublishDate.Format "2006/01/02 15:04" }}</time>
+  </div>
+  {{ end }}
+</main>
+{{ end }}

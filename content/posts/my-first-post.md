@@ -1,8 +1,15 @@
 ---
-date: "2023-06-27T16:47:48+03:30"
+date: "2023-06-27T16:48:48"
 draft: false
 slug: my-first-post-with-slug
 title: My First Post
+tags:
+  - hello
+  - first
+  - development
+categories:
+  - First
+  - Technical
 ---
 ## Hello
 

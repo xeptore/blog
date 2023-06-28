@@ -1,13 +1,29 @@
-{{ partial "header.html" . }}
+{{ define "head" }}
+<link rel="stylesheet" href='{{ "css/single.css" | absURL }}'>
+<link rel="stylesheet" href='{{ "css/sharingbuttons.css" | absURL }}'>
+{{ end }}
 
-<div class="container">
-    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
-        {{ partial "post-header.html" . }}
+{{ define "main" }}
+<main id="main" class="post">
+  <h1>{{ .Title }}</h1>
 
-        {{ partial "post-content.html" . }}
+  <article class="content">
+    {{ .Content }}
+  </article>
 
-        {{ partial "post-footer.html" . }}
-    </article>
-</div>
+  {{ if .Params.tags }}
+  <div>
+    {{ range .Params.tags }}
+    <a class="link" href='{{ "tags" | absURL }}/{{ . | urlize }}'>#{{ . }}</a>
+    {{ end }}
+  </div>
+  {{ end }}
 
-{{ partial "footer.html" . }}
+  {{ if .Page.Store.Get "hasMermaid" }}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  {{ end }}
+</main>
+{{ end }}
