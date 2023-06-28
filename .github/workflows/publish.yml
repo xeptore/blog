@@ -20,8 +20,6 @@ jobs:
       security-events: none
       statuses: none
     name: Publish to Cloudflare Pages
-    env:
-      GOPROXY: https://goproxy.io,direct
     steps:
       - name: Checkout
         uses: actions/checkout@v3
