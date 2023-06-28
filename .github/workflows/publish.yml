@@ -1,0 +1,63 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: none
+      actions: none
+      checks: none
+      discussions: none
+      id-token: none
+      issues: none
+      packages: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+    name: Publish to Cloudflare Pages
+    env:
+      GOPROXY: https://goproxy.io,direct
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Verify Installed Node
+        run: node --version
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Verify Installed pnpm
+        run: pnpm --version
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "stable"
+          cache: false
+          check-latest: true
+      - name: Verify Installed Go
+        run: go version
+      - name: Install Hugo
+        run: go install -tags extended github.com/gohugoio/hugo@latest
+      - name: Verify Hugo Installation
+        run: hugo env
+      - name: Build
+        run: hugo --minify
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: xeptore-blog
+          directory: ./public
+          wranglerVersion: "3"
