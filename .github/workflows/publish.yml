@@ -2,6 +2,9 @@ on:
   push:
     branches:
       - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_type }}
+  cancel-in-progress: true
 jobs:
   publish:
     runs-on: ubuntu-latest
