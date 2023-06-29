@@ -1,0 +1,15 @@
+{{ define "head" }}
+{{ with resources.Get "styles/404.sass" | toCSS | postCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
+{{ end }}
+{{ end }}
+
+{{ define "main" }}
+{{ partial "header.html" . }}
+<section>
+  <h1>404</h1>
+  <h2>You just hit a route that doesn't exist.</h2>
+  <a href="{{ "" | relURL }}">Go Home</a>
+</section>
+{{ partial "footer.html" . }}
+{{ end }}
