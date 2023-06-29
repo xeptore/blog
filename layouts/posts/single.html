@@ -1,23 +1,19 @@
 {{ define "head" }}
-<link rel="stylesheet" href='{{ "css/single.css" | absURL }}'>
-<link rel="stylesheet" href='{{ "css/sharingbuttons.css" | absURL }}'>
+  {{ with resources.Get "styles/posts/single.sass" | toCSS | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
+  {{ end }}
 {{ end }}
 
 {{ define "main" }}
-<main id="main" class="post">
-  <h1>{{ .Title }}</h1>
+<section>
+  <article>
+    <h1>{{ .Title }}</h1>
 
-  <article class="content">
+    {{ partial "post-meta.html" . }}
+    {{ partial "post-tags.html" . }}
+
     {{ .Content }}
   </article>
-
-  {{ if .Params.tags }}
-  <div>
-    {{ range .Params.tags }}
-    <a class="link" href='{{ "tags" | absURL }}/{{ . | urlize }}'>#{{ . }}</a>
-    {{ end }}
-  </div>
-  {{ end }}
 
   {{ if .Page.Store.Get "hasMermaid" }}
   <script type="module">
@@ -25,5 +21,5 @@
     mermaid.initialize({ startOnLoad: true });
   </script>
   {{ end }}
-</main>
+</s>
 {{ end }}

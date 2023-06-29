@@ -1,0 +1,7 @@
+{{ if ne .Params.tags nil }}
+<div class="tags not-prose">
+    {{ range .Params.tags }}
+    <a class="item" href='{{ "tags" | absURL }}/{{ . | urlize }}'>#{{ . }}</a>
+    {{ end }}
+</div>
+{{ end }}

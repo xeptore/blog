@@ -1,0 +1,9 @@
+<div class="meta">
+    {{ $timeUnit := "mins" }}
+    {{ if le .ReadingTime 1 }}
+    {{ $timeUnit = "min" }}
+    {{ end }}
+    <time class="publish-date">{{ .PublishDate.Format "2006/01/02" }}</time>
+    <span class="vertical-bar">&verbar;</span>
+    <span class="reading-time">{{ .ReadingTime }} {{ $timeUnit }} read</span>
+</div>

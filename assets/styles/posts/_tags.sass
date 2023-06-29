@@ -1,0 +1,10 @@
+@mixin tags
+  .tags
+    color: #f7a145
+    @apply mb-3
+    & .item
+      @apply mr-2 uppercase
+      &:last-child
+        margin-right: unset
+      &:hover
+        color: #5c92ff

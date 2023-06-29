@@ -1,7 +1,9 @@
 @import './global'
+@import './posts/meta'
+@import './posts/tags'
 
 header
-  @apply flex justify-between items-center py-4 md:py-10 md:px-7
+  @apply flex justify-between items-center py-4 md:py-10 px-4 md:px-7
   border-bottom: 1px solid lighten(#242933, 40)
 
   a[rel="home"]
@@ -12,8 +14,10 @@ header
   .links
     a[rel="about"]
       @apply uppercase underline underline-offset-4
+      color: darken(whitesmoke, 20)
 
 section
+  @apply px-4
   hr
     @apply md:w-11/12 mx-auto
     border: 1px solid lighten(#242933, 7)
@@ -33,19 +37,26 @@ section
       @apply text-base underline
       color: #5c92ff
 
-    .tags
-      color: #f7a145
-      @apply mb-3
-      & .item
-        @apply mr-2 uppercase
-        &:last-child
-          margin-right: unset
-        &:hover
-          color: #5c92ff
+    @include tags
+    @include meta
 
-    .meta
-      color: #a5a5a5
-      @apply mb-1
+footer
+  @apply py-4 md:py-10 px-4 md:px-7 text-center
+  border-top: 1px solid lighten(#242933, 40)
 
-      .publish-date, .vertical-bar
-        @apply mr-3
+  .copyright a
+    @apply underline decoration-dotted
+
+  .icons
+    @apply flex justify-evenly mt-4 w-1/2 mx-auto sm:w-1/4
+    &>a
+      @apply inline-block
+      color: whitesmoke
+      fill: whitesmoke
+
+      &:hover
+        color: lighten(#5c92ff, 10)
+        fill: lighten(#5c92ff, 10)
+
+      &>svg
+        @apply h-5 w-5
