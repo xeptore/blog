@@ -1,0 +1,15 @@
+{{ define "head" }}
+  {{ with resources.Get "styles/pages/single.sass" | toCSS | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
+  {{ end }}
+{{ end }}
+
+{{ define "main" }}
+<section>
+  <article>
+    <h1>{{ .Title }}</h1>
+
+    {{ .Content }}
+  </article>
+</section>
+{{ end }}
