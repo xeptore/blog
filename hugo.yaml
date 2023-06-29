@@ -1,6 +1,6 @@
 baseURL: https://xeptore.blog/
 languageCode: en-us
-title: xeptore.blog
+title: xeptore
 cleanDestinationDir: true
 enableEmoji: true
 enableInlineShortcodes: true
@@ -20,5 +20,9 @@ params:
   keywords:
     - dev
     - development
+    - programming
+    - coding
+    - software-engineering
+    - software-development
     - tech
     - tech-writeup

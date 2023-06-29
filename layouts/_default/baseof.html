@@ -28,6 +28,10 @@
     <meta name="description" content="{{ .Site.Params.description }}" />
     {{ end }}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -43,15 +47,12 @@
     {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/schema.html" . }}
 
-    {{ $styles := resources.Get "css/global.css" | postCSS | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"/>
-
     {{ block "head" . }}{{ end }}
   </head>
 
   <body>
-    <div id="wrapper">
+    <main>
       {{ block "main" . }}{{ end }}
-    </div>
+    </main>
   </body>
 </html>

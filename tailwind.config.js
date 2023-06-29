@@ -3,6 +3,9 @@ module.exports = {
   content: ["content/**/*.md", "layouts/**/*.html"],
   theme: {
     extend: {},
+    container: {
+      center: true,
+    },
   },
   plugins: [
     require("@tailwindcss/forms"),
