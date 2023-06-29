@@ -1,12 +1,11 @@
 {{ define "head" }}
-{{ with resources.Get "styles/index.sass" | toCSS | postCSS | minify | fingerprint }}
+{{ with resources.Get "styles/tags/list.sass" | toCSS | postCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
 {{ end }}
 {{ end }}
 
 {{ define "main" }}
 {{ partial "header.html" . }}
-{{ $paginator := .Paginate (where .Site.RegularPages "Type" "==" "posts") }}
-{{ partial "posts-list.html" $paginator }}
+{{ partial "posts-list.html" .Paginator }}
 {{ partial "footer.html" . }}
 {{ end }}

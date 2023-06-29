@@ -1,0 +1,22 @@
+@mixin footer()
+  footer
+    @apply py-4 md:py-10 px-4 md:px-7 text-center
+    border-top: 1px solid lighten(#242933, 40)
+
+    .copyright a
+      @apply underline decoration-dotted
+      underline-offset: 6px
+
+    .icons
+      @apply flex justify-evenly mt-4 w-1/2 mx-auto sm:w-1/4
+      &>a
+        @apply inline-block
+        color: whitesmoke
+        fill: whitesmoke
+
+        &:hover
+          color: lighten(#5c92ff, 10)
+          fill: lighten(#5c92ff, 10)
+
+        &>svg
+          @apply h-5 w-5

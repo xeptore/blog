@@ -1,0 +1,24 @@
+@mixin posts-list()
+  section
+    @apply px-4 grow
+    hr
+      @apply md:w-11/12 mx-auto
+      border: 1px solid lighten(#242933, 7)
+
+    .post
+      @apply py-4 md:py-10 md:px-7
+
+      .title
+        @apply text-2xl font-normal mb-2
+        & .link:hover
+          @apply underline
+
+      .summary
+        @apply text-lg mb-4
+
+      .read-link
+        @apply text-base underline
+        color: #5c92ff
+
+      @include tags
+      @include meta
