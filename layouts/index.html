@@ -1,6 +1,7 @@
 {{ define "head" }}
-{{ $styles := resources.Get "styles/index.sass" | toCSS | postCSS | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+  {{ with resources.Get "styles/index.sass" | toCSS | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
+  {{ end }}
 {{ end }}
 
 {{ define "main" }}
