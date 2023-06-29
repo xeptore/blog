@@ -15,6 +15,9 @@ build:
 permalinks:
   posts: /:slug
   pages: /:slug
+disableKinds:
+  - taxonomy
+  - section
 params:
   description: Here I write...
   keywords:
