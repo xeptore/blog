@@ -1,6 +1,7 @@
 baseURL: https://xeptore.blog/
 languageCode: en-us
 title: xeptore
+timeZone: Etc/UTC
 cleanDestinationDir: true
 enableEmoji: true
 enableInlineShortcodes: true
