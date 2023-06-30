@@ -21,6 +21,8 @@ disableKinds:
   - section
 params:
   description: Here I write...
+  images:
+    - images/image.png
   keywords:
     - dev
     - development
