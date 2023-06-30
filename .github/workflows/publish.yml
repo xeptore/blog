@@ -53,7 +53,7 @@ jobs:
       - name: Verify Hugo Installation
         run: hugo env
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --printPathWarnings --printI18nWarnings --printUnusedTemplates
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
