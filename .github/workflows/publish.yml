@@ -49,11 +49,11 @@ jobs:
       - name: Verify Installed Go
         run: go version
       - name: Install Hugo
-        run: go install -tags extended github.com/gohugoio/hugo@v0.114.1
+        run: go install -tags extended github.com/gohugoio/hugo@latest
       - name: Verify Hugo Installation
         run: hugo env
       - name: Build
-        run: hugo --minify --printPathWarnings --printI18nWarnings --printUnusedTemplates
+        run: make build
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
