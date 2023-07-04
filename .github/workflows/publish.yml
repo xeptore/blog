@@ -7,6 +7,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   publish:
+    env:
+      HUGO_VERSION: v0.115.1
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -49,7 +51,9 @@ jobs:
       - name: Verify Installed Go
         run: go version
       - name: Install Hugo
-        run: go install -tags extended github.com/gohugoio/hugo@latest
+        run: |
+          curl -SfL https://github.com/gohugoio/hugo/releases/download/v${{ env.HUGO_VERSION }}/hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.tar.gz | tar -xzvf - hugo
+          export PATH="$PATH:$(pwd)"
       - name: Verify Hugo Installation
         run: hugo env
       - name: Build
