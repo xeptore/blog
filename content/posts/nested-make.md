@@ -3,6 +3,8 @@ title: Nested Make
 date: 2023-07-04T14:58:08Z
 draft: false
 slug: nested-make
+images:
+  - /images/posts/nested-make/banner.png
 summary: Another solution for invoking commands inside another working directory context.
 tags:
   - make
