@@ -5,6 +5,15 @@ summary: CNAME flattening is a feature provided by some DNS services to either s
 slug: cname-flattening
 date: 2023-06-30T08:49:40Z
 draft: false
+keywords:
+  - dns
+  - cname
+  - dns-record
+  - cname-record
+  - cloudflare-dns
+  - cname-flattening
+  - cloudflare-cname-flattening
+  - cloudflare-dns-proxy
 tags:
   - dns
 ---

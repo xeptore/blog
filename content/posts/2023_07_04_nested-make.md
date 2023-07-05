@@ -6,6 +6,14 @@ slug: nested-make
 images:
   - /images/posts/nested-make/banner.png
 summary: Another solution for invoking commands inside another working directory context.
+description: Sometimes we need to execute a command inside another directory using Make. Let's see what are some common options, and demonstrate my preferred one.
+keywords:
+  - make
+  - makefile
+  - makefile-with-cd
+  - make-command-in-other-directory
+  - nested-make
+  - execute-command-in-other-directory
 tags:
   - make
 ---
