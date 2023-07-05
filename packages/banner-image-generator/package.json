@@ -1,0 +1,20 @@
+{
+  "name": "banner-image-generator",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "gen": "node gen.js"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.4.2",
+    "browserslist": "^4.21.9",
+    "modern-normalize": "^2.0.0",
+    "puppeteer": "^20.7.4",
+    "sass": "^1.63.6",
+    "svelte": "^4.0.4",
+    "vite": "^4.3.9"
+  }
+}

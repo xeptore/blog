@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "dev-banner": "pnpm --filter ./packages/banner-image-generator run dev",
+    "gen-banner": "pnpm --filter ./packages/banner-image-generator run gen"
+  },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
