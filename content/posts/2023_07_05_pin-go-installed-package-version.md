@@ -35,7 +35,7 @@ There are also many packages available by the Go community that needs to be inst
 - [`jet`](https://github.com/go-jet/jet): Generates type-safe models from existing SQL database schemas alongside provided utilities for writing SQL queries in Go
 - [`easyjson`](https://github.com/mailru/easyjson): Generates code for `struct`s that does JSON serialization, and deserialization
 
-For this post, let's take `mock` package as an example, and let's assume that you also have a `Make` target similar to the following to make command execution easier:
+Let's take `mock` package as an example, and have a simple `Make` target similar to the following to make command execution easier:
 
 ```makefile
 .PHONY: gen
@@ -45,10 +45,10 @@ gen:
 
 This has a couple of issues in general:
 
-- It **assumes** the user has `mock` already installed on their machine, and it's available in executables `$PATH`, which is, in general, a bold assumption for a developer who joined recently for example. On someone who does not _want_ to have `$GOBIN` directory in their `$PATH`. What if there might be other executables in their `$GOBIN` that might mess up with the ones installed system-wide?
+- It **assumes** the user has `mock` already installed on their machine, and it's available in executables `$PATH`, which is, in general, a bold assumption for a developer who joined recently for example. Or they do not _want_ to include `$GOBIN` directory in their `$PATH`, maybe because there is an executables in their `$GOBIN` that might mess up with the ones installed system-wide.
 - How would a developer know what is that `mock` executable, and where to install it from? Specially for some packages where their executable name differs from the package name, like `mock`. It seems we need some sort of documentation here, right?
 - What if there is another executable named `mock` installed on your machine that gets executed instead of the one you installed using `go install`? How would you resolve this?
-- What if the version resolved to the `latest` tag at the time of installation on my machine is `v1.1.0` for example, but version `v1.2.0` gets installed on CI environment tomorrow that causes some sort of misbehavior internally without any explicit errors on production?
+- What if the version resolved to the `latest` tag at the time of installation on my machine is `v1.1.0`, for example, but version `v1.2.0` gets installed on CI environment tomorrow that causes some sort of misbehavior internally without any explicit errors on production?
 
 ## Solution
 
@@ -60,6 +60,6 @@ gen:
 	go run github.com/golang/mock/mockgen@v1.6.0 -source=foo.go
 ```
 
-At it does the same thing without installing the executable in the `$GOBIN` directory. Look at how explicit this version is, and we'd always wanted explicitness, don't we?
+It does the same thing without installing the executable in the `$GOBIN` directory. Look at how explicit this version is, and we'd always want explicitness, don't we?
 
-How this works is retrieving the specified version once, build it. Any subsequent execution of the same command will result in a cache-hit, and doesn't require any downloads unless you change the version tag.
+How this works is it retrieves the specified version once, and builds it. Any subsequent execution of the same command will result in a cache-hit, and doesn't require any downloads unless you change the version tag.
