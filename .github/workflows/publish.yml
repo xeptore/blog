@@ -67,6 +67,8 @@ jobs:
           directory: ./public
           wranglerVersion: "3"
       - name: Build Draft
+        env:
+          HUGO_BASEURL: https://draft.xeptore.blog
         run: make build-draft
       - name: Publish Draft to Cloudflare Pages
         uses: cloudflare/pages-action@v1
