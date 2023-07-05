@@ -45,7 +45,7 @@ There are some common solutions for this:
     cd ..
     ```
 
-2. Add a target to the Makefile that before executing the generator command, it `cd`s into `/db/` directory.
+2. Add a target to Makefile such that it includes `cd` command before executing the actual generator command.
 3. Add a target that executes the generator command in `/db/Makefile`, and a similar target in the root `Makefile` that simply forwards the target command execution to the `Makefile` inside `/db/` directory.
 
 The last solution, I think, makes intentions clearer, compared to the 1st solution, which at some point might cause confusions about who is going to execute that shell script, the application itself, or developers? What if a developer executes the script directly from project's root directory? How is the platform support for that shell script format? When compared to the 2nd option, it doesn't require any _explicit_ `cd` instructions, which might become a problem when it comes to cross-platform development support. Of course there are some drawbacks to this solution, but let's have a demonstration of it.
