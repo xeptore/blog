@@ -4,11 +4,11 @@ run:
 
 .PHONY: build
 build:
-	hugo --minify --printPathWarnings --printI18nWarnings --printUnusedTemplates
+	hugo --gc --minify --printPathWarnings --printI18nWarnings --printUnusedTemplates
 
 .PHONY: build-draft
 build-draft:
-	hugo --minify --buildDrafts --buildFuture --printPathWarnings --printI18nWarnings --printUnusedTemplates
+	hugo --gc --minify --buildDrafts --buildFuture --printPathWarnings --printI18nWarnings --printUnusedTemplates
 
 .PHONY: post
 post:
