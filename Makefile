@@ -1,10 +1,14 @@
 .PHONY: run
 run:
-	hugo server --buildDrafts --disableFastRender --printPathWarnings --printI18nWarnings --printUnusedTemplates --noHTTPCache --logLevel info
+	hugo server --buildDrafts --buildFuture --disableFastRender --printPathWarnings --printI18nWarnings --printUnusedTemplates --noHTTPCache --logLevel info
 
 .PHONY: build
 build:
 	hugo --minify --printPathWarnings --printI18nWarnings --printUnusedTemplates
+
+.PHONY: build-draft
+build-draft:
+	hugo --minify --buildDrafts --buildFuture --printPathWarnings --printI18nWarnings --printUnusedTemplates
 
 .PHONY: post
 post:

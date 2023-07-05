@@ -66,3 +66,13 @@ jobs:
           projectName: xeptore-blog
           directory: ./public
           wranglerVersion: "3"
+      - name: Build Draft
+        run: make build-draft
+      - name: Publish Draft to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: xeptore-blog-draft
+          directory: ./public
+          wranglerVersion: "3"
