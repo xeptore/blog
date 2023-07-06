@@ -52,7 +52,7 @@ The last solution, I think, makes intentions clearer, compared to the 1st soluti
 
 Content of `/Makefile`:
 
-```md
+```makefile
 .PHONY: gen
 gen:
 	$(MAKE) -C ./db gen
@@ -60,7 +60,7 @@ gen:
 
 And, `/db/Makefile`:
 
-```md
+```makefile
 .PHONY: gen
 gen:
 	somescript that --generates files

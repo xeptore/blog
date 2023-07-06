@@ -9,6 +9,9 @@ enableMissingTranslationPlaceholders: true
 enableRobotsTXT: true
 paginate: 20
 paginatePath: pages
+markup:
+  highlight:
+    style: catppuccin-mocha
 minify:
   minifyOutput: true
 build:
