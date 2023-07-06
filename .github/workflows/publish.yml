@@ -10,7 +10,7 @@ concurrency:
 jobs:
   publish:
     env:
-      HUGO_VERSION: 0.115.1
+      HUGO_VERSION: 0.115.0
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -56,6 +56,11 @@ jobs:
         run: |
           curl -SfL https://github.com/gohugoio/hugo/releases/download/v${{ env.HUGO_VERSION }}/hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.tar.gz | tar -xzvf - hugo
           echo "$(pwd)" >> $GITHUB_PATH
+      - name: Check Hugo Latest Release
+        run: |
+          latest_version=$(wget -qO- https://api.github.com/repos/gohugoio/hugo/tags | jq -r '.[0].name')
+          greatest_version=$(pnpm --silent dlx semver v${{ env.HUGO_VERSION }} "${latest_version}" | tail -1)
+          [[ "$greatest_version" != "v${{ env.HUGO_VERSION }}" ]] && echo "::warning title='Check Hugo Latest Release'::There is version ${latest_version} available"
       - name: Verify Hugo Installation
         run: hugo env
       - name: Build
