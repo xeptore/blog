@@ -2,6 +2,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: 0 */4 * * *
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_type }}
   cancel-in-progress: true
