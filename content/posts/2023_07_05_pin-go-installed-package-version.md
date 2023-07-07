@@ -7,7 +7,7 @@ date: 2023-07-05T08:30:14Z
 publishDate: 2023-07-07T08:30:14Z
 images:
   - /images/posts/pin-go-installed-package-version/banner.png
-draft: true
+draft: false
 tags:
   - go
   - versioning
