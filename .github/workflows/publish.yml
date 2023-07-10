@@ -10,7 +10,7 @@ concurrency:
 jobs:
   publish:
     env:
-      HUGO_VERSION: 0.115.1
+      HUGO_VERSION: 0.115.2
     runs-on: ubuntu-latest
     permissions:
       contents: read
