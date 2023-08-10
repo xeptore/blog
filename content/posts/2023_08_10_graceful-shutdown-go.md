@@ -6,7 +6,7 @@ summary: In the context of long-living applications, such as web servers, it's a
 date: 2023-08-10T08:42:12Z
 images:
   - /images/posts/graceful-shutdown-go/banner.png
-draft: true
+draft: false
 tags:
   - go
 keywords:
