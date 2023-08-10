@@ -77,7 +77,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 	db, err := connectDB(ctx) // TODO: handle the error you lazy ignorant!
-  // rest is the same...
+	// rest is the same...
 }
 ```
 
