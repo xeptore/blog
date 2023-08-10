@@ -14,6 +14,8 @@ keywords:
   - go
 ---
 
+Most of the time, the applications we write acquire some kind of resources, from a file descriptor, database connection, connection to a message broker, event subscription handler, etc., either at startup, or during their operation. It's better to release them once we no longer need them. However, some types of resources are long-lived, meaning they must be kept around as long as the application itself is working, and must be released just before the application process is terminated. In this post, I'm going to implement a resource cleanup pattern i usually use in Go applications updated to use a new function introduced few days ago in Go 1.21.
+
 Let's start with the following code snippet of an HTTP web server:
 
 ```go
@@ -39,6 +41,7 @@ func main() {
 	if nil != err {
 		panic(fmt.Errorf("failed to initialize database connection: %v", err))
 	}
+	fmt.Println(db)// do something with db
 	router := httprouter.New()
 	httpServer := http.Server{Addr: "127.0.0.1:9090", Handler: router}
 	httpServer.ListenAndServe() // TODO: handle the error you lazy ignorant!
@@ -58,8 +61,14 @@ func connectDB(ctx context.Context) (*sql.DB, error) {
 
 To shutdown the process, we have 2 options:
 
-- Kill it! Which we as programmers don't believe in violence (1)
+- Kill it! Which as programmers we don't believe in violence [^no-violence]
 - Send `INT` (interrupt) signal to it, which is the same as pressing `^C` (CTRL+C) in the terminal
+
+[^no-violence]: If you don't think so, remember this:
+
+	```c
+	int n = *((int *) (void *)x)
+	```
 
 The problem with the existing code is that the `INT` signal just immediately terminates the process. However, we need to get prepared for death! Let's update the code:
 
@@ -72,7 +81,9 @@ func main() {
 }
 ```
 
-As noted in [`signal.NotifyContext`](https://pkg.go.dev/os/signal#NotifyContext) documentation, it basically marks the returned context as done, when any of the signals received by the application. With this change, the process can _listen_ to the `INT`, and `TERM` signals, which are the most commonly used signals on operating systems to indicate a shutdown request (2)(it's not actually _listening_, it's more like altering the default behavior of the process when such signals are received). Also, deferring the `stop` function is recommended as it cleans up some internal stuff before the `main` function is returned.
+As noted in [`signal.NotifyContext`](https://pkg.go.dev/os/signal#NotifyContext) documentation, it basically marks the returned context as done, when any of the signals received by the application. With this change, the process can _listen_ to the `INT`, and `TERM` signals, which are the most commonly used signals on operating systems to indicate a shutdown request [^context-listener]. Also, deferring the `stop` function is recommended as it cleans up some internal stuff before the `main` function is returned.
+
+[^context-listener]: It's not actually _listening_, it's more like altering the default behavior of the process when such signals are received as Go's default behavior is to terminate the main goroutine when `INT` signal is received.
 
 OK, but how can we kind of _listen_ to the closure event of this context and do the cleanup once it's fired? Go 1.21 added the [`context.AfterFunc`](https://pkg.go.dev/context#AfterFunc) helper function, which alongside other fancy features it offers, it basically executes a function in a separate goroutine once a context is done. Let's update the code and use it:
 
@@ -127,12 +138,12 @@ Which can be used to update the previous version of the code as below:
 
 ```go
 func main() {
-  // ... database connection and http server initialization as before
+	// ... database connection and http server initialization as before
 	done := AfterFunc(ctx, func() {
 		httpServer.Shutdown(ctx) // TODO: handle the error you lazy ignorant!
 		db.Close() // TODO: handle the error you lazy ignorant!
 	})
-  // ... start http server listener as before
+	// ... start http server listener as before
 	<-done
 }
 ```
