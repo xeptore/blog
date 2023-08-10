@@ -6,7 +6,7 @@
 </script>
 
 <main style:--width={width} style:--height={height}>
-  <h1 class="text">Pin Go Installed Package Version</h1>
+  <h1 class="text">Graceful Shutdown Go Apps</h1>
   <footer>https://xeptore.blog</footer>
 </main>
 
