@@ -150,6 +150,63 @@ func main() {
 
 Seems simpler and more reasonable to read.
 
+Here's the complete final version of the code:
+
+```go
+package main
+
+import (
+	"context"
+	"database/sql"
+	"errors"
+	"fmt"
+	"net/http"
+	"os"
+	"syscall"
+	"time"
+
+	"github.com/julienschmidt/httprouter"
+	_ "github.com/lib/pq"
+)
+
+func main() {
+	ctx := context.Background()
+	db, err := connectDB(ctx)
+	if nil != err {
+		panic(fmt.Errorf("failed to initialize database connection: %v", err))
+	}
+	fmt.Println(db)// do something with db
+	router := httprouter.New()
+	httpServer := http.Server{Addr: "127.0.0.1:9090", Handler: router}
+	done := AfterFunc(ctx, func() {
+		httpServer.Shutdown(ctx) // TODO: handle the error you lazy ignorant!
+		db.Close() // TODO: handle the error you lazy ignorant!
+	})
+	httpServer.ListenAndServe() // TODO: handle the error you lazy ignorant!
+	<-done
+}
+
+func connectDB(ctx context.Context) (*sql.DB, error) {
+	conn, err := sql.Open("postgres", os.Getenv("DB_DSN"))
+	if nil != err {
+		return nil, fmt.Errorf("db: failed to open database connection: %v", err)
+	}
+	if err := conn.PingContext(ctx); nil != err {
+		return nil, fmt.Errorf("db: failed to ping database connection: %v", err)
+	}
+	return conn, nil
+}
+
+func AfterFunc(ctx context.Context, fn func()) <-chan bool {
+	done := make(chan bool)
+	_ = context.AfterFunc(ctx, func() {
+		defer func() { done <- true }()
+		fn()
+	})
+	return done
+}
+```
+
 ## Conclusion
 
 I tried to demonstrate the concept of graceful shutdown/closure of a web application in Go. Of course, the details depends on the requirements, but I always try keep these rules in mind, specially when writing Go code:
