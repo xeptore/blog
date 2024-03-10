@@ -1,0 +1,17 @@
+{{ define "head" }}
+  {{ with resources.Get "styles/podcast/single.sass" | toCSS | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
+  {{ end }}
+{{ end }}
+
+{{ define "main" }}
+<section>
+  <article>
+    <h1>{{ .Title }}</h1>
+
+    {{ partial "post-tags.html" . }}
+
+    {{ .Content }}
+  </article>
+</section>
+{{ end }}

@@ -1,0 +1,13 @@
+<div class="player">
+	<audio
+		controls
+		{{ with .Get "id" }}id="{{ . }}"{{ end }}
+		{{ with .Get "preload" }}preload="{{ . }}"{{ else }}preload="metadata"{{ end }}
+	>
+		<source
+			{{ with .Get "src" }}src="{{ . }}"{{ end }}
+			{{ with .Get "type" }}type="audio/{{ . }}"{{ end }}
+		/>
+		Your browser does not support the audio element.
+	</audio>
+</div>

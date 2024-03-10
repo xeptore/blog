@@ -1,0 +1,12 @@
+{{ define "head" }}
+{{ with resources.Get "styles/index.sass" | toCSS | postCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
+{{ end }}
+{{ end }}
+
+{{ define "main" }}
+{{ partial "header.html" . }}
+{{ $paginator := .Paginate (where .Site.RegularPages "Type" "==" "podcast") }}
+{{ partial "posts-list.html" $paginator }}
+{{ partial "footer.html" . }}
+{{ end }}
