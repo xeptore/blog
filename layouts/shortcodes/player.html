@@ -1,0 +1,9 @@
+<div class="player">
+	<audio controls id="plyr" preload="metadata">
+		<source
+			{{ with .Get "src" }}src="{{ . }}"{{ end }}
+			{{ with .Get "mime" }}type="audio/{{ . }}"{{ end }}
+		/>
+		Your browser does not support the audio element.
+	</audio>
+</div>

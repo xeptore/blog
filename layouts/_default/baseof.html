@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="xeptore" />
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}</title>
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else if eq .Type "podcast" }}Not An Engineer - {{ .Title }}{{ else }}{{ .Title }}{{ end }}</title>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -32,6 +32,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 
+    {{ if eq .Type "podcast" }}
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    {{ end }}
+
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -49,11 +54,40 @@
     {{ template "_internal/schema.html" . }}
 
     {{ block "head" . }}{{ end }}
+
+    <style>
+      :root {
+        --plyr-audio-controls-background: #181a1b;
+        --plyr-focus-visible-color: #3f4244;
+        --plyr-audio-control-color: #a6adb9;
+        --plyr-color-main: #3f4244;
+        --plyr-menu-background: #181a1b;
+        --plyr-menu-color: #a6adb9;
+      }
+    </style>
   </head>
 
   <body>
     <main>
       {{ block "main" . }}{{ end }}
     </main>
+
+    {{ if eq .Type "podcast" }}
+    <script>
+      const player = new Plyr('#plyr', {
+        speed: {
+          selected: 1.5,
+          options: [0.5, 1, 1.5, 2, 2.5]
+        },
+        storage: {
+          enabled: false,
+        },
+        keyboard: {
+          focused: true,
+          global: true,
+        },
+      });
+    </script>
+    {{ end }}
   </body>
 </html>

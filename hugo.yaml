@@ -15,13 +15,9 @@ markup:
 minify:
   minifyOutput: true
 build:
-  writeStats: true
-permalinks:
-  posts: /:slug
-  pages: /:slug
+  writeStats: false
 disableKinds:
   - taxonomy
-  - section
 params:
   description: Here I write...
   images:

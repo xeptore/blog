@@ -1,0 +1,36 @@
+<section>
+  {{ range $i, $v := .Pages }}
+  {{ if $i }}
+  <hr />
+  {{ end }}
+  <div class="post">
+    {{ partial "post-meta.html" . }}
+    {{ partial "post-tags.html" . }}
+
+    <h2 class="title">
+      <a class="link" href="{{ $v.Permalink }}">{{ $v.Title }}</a>
+    </h2>
+
+    <div class="summary">
+      {{ $v.Summary }}
+    </div>
+
+    <a class="read-link" href="{{ $v.Permalink }}">Listen</a>
+  </div>
+  {{ end }}
+
+  {{ if .HasPrev | or .HasNext }}
+  <div class="paginator">
+    {{ if .HasPrev }}
+    <a class="link" href="{{ .Prev.URL }}">← prev</a>
+    {{ else }}
+    <a></a>
+    {{ end }}
+    {{ if .HasNext }}
+    <a class="link" href="{{ .Paginator.Next.URL }}">next →</a>
+    {{ else }}
+    <a></a>
+    {{ end }}
+  </div>
+  {{ end }}
+</section>
