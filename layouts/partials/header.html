@@ -2,7 +2,7 @@
   <a rel="home" target="_self" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
 
   <div class="links">
-    <a rel="podcast" href='{{ ref . "/podcast" }}'>Podcast</a>
-    <a rel="about" href='{{ ref . "/about" }}'>About</a>
+    <a rel="podcast" href={{ ref . "/podcast" }}>Podcast</a>
+    <a rel="about" href={{ ref . "/about" }}>About</a>
   </div>
 </header>

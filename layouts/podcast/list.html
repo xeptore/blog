@@ -7,6 +7,6 @@
 {{ define "main" }}
 {{ partial "header.html" . }}
 {{ $paginator := .Paginate (where .Site.RegularPages "Type" "==" "podcast") }}
-{{ partial "posts-list.html" $paginator }}
+{{ partial "podcast-episodes-list.html" $paginator }}
 {{ partial "footer.html" . }}
 {{ end }}
