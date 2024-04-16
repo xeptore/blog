@@ -8,7 +8,7 @@ concurrency:
 jobs:
   publish:
     env:
-      HUGO_VERSION: "0.123.8"
+      HUGO_VERSION: "0.124.1"
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,13 +31,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 21
+          node-version: "21"
       - name: Verify Installed Node
         run: node --version
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: "8"
+          version: "9"
       - name: Verify Installed pnpm
         run: pnpm --version
       - name: Install Dependencies
