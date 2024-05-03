@@ -14,7 +14,7 @@
     "modern-normalize": "^2.0.0",
     "puppeteer": "^22.6.5",
     "sass": "^1.75.0",
-    "svelte": "^4.2.14",
+    "svelte": "^4.2.15",
     "vite": "^5.2.9"
   }
 }
