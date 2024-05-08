@@ -35,7 +35,7 @@ jobs:
       - name: Verify Installed Node
         run: node --version
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
           version: "9"
       - name: Verify Installed pnpm
