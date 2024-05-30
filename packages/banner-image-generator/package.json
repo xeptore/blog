@@ -9,7 +9,7 @@
     "gen": "node gen.js"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "browserslist": "^4.23.0",
     "modern-normalize": "^2.0.0",
     "puppeteer": "^22.9.0",
