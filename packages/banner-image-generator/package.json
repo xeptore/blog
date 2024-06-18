@@ -12,7 +12,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "browserslist": "^4.23.0",
     "modern-normalize": "^2.0.0",
-    "puppeteer": "^22.10.0",
+    "puppeteer": "^22.11.2",
     "sass": "^1.77.4",
     "svelte": "^4.2.18",
     "vite": "^5.2.13"
